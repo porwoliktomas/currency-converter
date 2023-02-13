@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import convertRouter from "./routes/convert";
+import currenciesRouter from "./routes/currencies";
 
 dotenv.config();
 
@@ -11,6 +12,7 @@ app.head("/", (_req, res) => {
 });
 
 app.use("/convert", convertRouter);
+app.use("/currencies", currenciesRouter);
 
 const port = process.env.PORT;
 app.listen(port, () => {
