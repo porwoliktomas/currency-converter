@@ -1,2 +1,5 @@
 /node_modules
 /dist
+
+# DB file
+/stats.sqlite3

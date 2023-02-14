@@ -1,5 +1,6 @@
 import express from "express";
 import axios from "axios";
+import insertStats from "../db/insert";
 
 const router = express.Router();
 
@@ -16,7 +17,10 @@ router.get("/:from/:to/:amount", async (req, res) => {
   if (data.data) {
     const rateFrom = data.data.rates[req.params.from];
     const rateTo = data.data.rates[req.params.to];
-    const result = (parseFloat(req.params.amount) / rateFrom) * rateTo;
+    const resultUSD = parseFloat(req.params.amount) / rateFrom;
+    const result = resultUSD * rateTo;
+
+    insertStats(req.params.to, resultUSD);
 
     res.send({ result });
   } else {

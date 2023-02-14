@@ -1,12 +1,15 @@
 import { useState } from "react";
 import CurrencyDropdown from "./CurrencyDropdown";
 import { convert } from "../convert/convert";
+import { useQueryClient } from "react-query";
 
 export default function CurrencyConverter() {
   const [amount, setAmount] = useState("1");
   const [fromCurrency, setFromCurrency] = useState("EUR");
   const [toCurrency, setToCurrency] = useState("USD");
   const [result, setResult] = useState<number | undefined>();
+
+  const queryClient = useQueryClient();
 
   const handleSubmit = async () => {
     const response = await convert(
@@ -16,6 +19,8 @@ export default function CurrencyConverter() {
     );
 
     setResult(response.data.result);
+
+    queryClient.invalidateQueries("stats");
   };
 
   return (
