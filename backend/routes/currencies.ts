@@ -7,7 +7,7 @@ type CurrenciesResponse = {
   rates: { [currency: string]: string };
 };
 
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
   const apiKey = process.env.OPENEXCHANGERATES_API_KEY;
   const data = await axios.get<CurrenciesResponse>(
     `https://openexchangerates.org/api/currencies.json?app_id=${apiKey}`
