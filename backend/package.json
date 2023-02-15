@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "author": "Tomas Porwolik",
   "description": "Backend for the currency converter app",
-  "main": "app.ts",
+  "main": "src/app.ts",
   "scripts": {
     "build": "npx tsc",
     "start": "node dist/app.js",

@@ -1,6 +1,6 @@
 import express from "express";
-import insertStats from "../db/insert";
 import cachedAxios from "../cache/cachedAxios";
+import insertStats from "../db/insert";
 
 const router = express.Router();
 
