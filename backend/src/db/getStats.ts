@@ -1,7 +1,7 @@
 import { Database } from "sqlite3";
 import { selectAll, selectOne } from "./dbUtils";
 
-type Stats = {
+export type Stats = {
   mostPopularDestinationCurrencies: string[];
   totalAmountConvertedInUsd: number;
   totalRequests: number;
