@@ -13,8 +13,8 @@ initDB();
 const app = express();
 app.use(cors());
 
-app.head("/", (_req, res) => {
-  res.status(200);
+app.all("/", (_req, res) => {
+  res.sendStatus(200);
 });
 
 app.use("/convert", convertRouter);
