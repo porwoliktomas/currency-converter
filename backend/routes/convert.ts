@@ -1,6 +1,6 @@
 import express from "express";
-import axios from "axios";
 import insertStats from "../db/insert";
+import cachedAxios from "../cache/cachedAxios";
 
 const router = express.Router();
 
@@ -10,8 +10,9 @@ type LatestResponse = {
 
 router.get("/:from/:to/:amount", async (req, res) => {
   const apiKey = process.env.OPENEXCHANGERATES_API_KEY;
-  const data = await axios.get<LatestResponse>(
-    `https://openexchangerates.org/api/latest.json?app_id=${apiKey}`
+  const data = await cachedAxios.get<LatestResponse>(
+    `https://openexchangerates.org/api/latest.json?app_id=${apiKey}`,
+    { cache: { ttl: 1000 * 60 * 60 } } // 1 hour
   );
 
   if (data.data) {
