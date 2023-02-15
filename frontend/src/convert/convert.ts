@@ -6,6 +6,7 @@ type ConvertResponse = {
 
 export const convert = async (amount: number, from: string, to: string) => {
   return await axios.get<ConvertResponse>(
-    process.env.REACT_APP_API_URL! + `/convert/${from}/${to}/${amount}`
+    process.env.REACT_APP_API_URL! +
+      `/convert?from=${from}&to=${to}&amount=${amount}`
   );
 };
