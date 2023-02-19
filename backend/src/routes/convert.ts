@@ -71,7 +71,14 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  res.send({ result });
+  res.send({
+    query: {
+      from: fromCurrency,
+      to: toCurrency,
+      amount: amount,
+    },
+    result,
+  });
 });
 
 export default router;
