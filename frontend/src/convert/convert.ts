@@ -1,6 +1,11 @@
 import axios from "axios";
 
-type ConvertResponse = {
+export type ConvertResponse = {
+  query: {
+    from: string;
+    to: string;
+    amount: number;
+  };
   result: number;
 };
 

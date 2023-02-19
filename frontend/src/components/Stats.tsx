@@ -4,23 +4,30 @@ export default function Stats() {
   const stats = useStats();
 
   return stats.data ? (
-    <>
+    <div>
       <div>
         Most popular destination currencies:{" "}
-        {stats.data.data.stats.mostPopularDestinationCurrencies.join(", ") ||
-          "---"}
+        <span className="font-semibold">
+          {stats.data.data.stats.mostPopularDestinationCurrencies.join(", ") ||
+            "---"}
+        </span>
       </div>
       <div>
-        Total amount converted (in USD):{" "}
-        {stats.data.data.stats.totalAmountConvertedInUsd.toLocaleString(
-          undefined,
-          { maximumFractionDigits: 2 }
-        )}
+        Total amount converted:{" "}
+        <span className="font-semibold">
+          {stats.data.data.stats.totalAmountConvertedInUsd.toLocaleString(
+            undefined,
+            { maximumFractionDigits: 2 }
+          )}{" "}
+          USD
+        </span>
       </div>
       <div>
         Total number of conversion requests made:{" "}
-        {stats.data.data.stats.totalRequests.toLocaleString()}
+        <span className="font-semibold">
+          {stats.data.data.stats.totalRequests.toLocaleString()}
+        </span>
       </div>
-    </>
+    </div>
   ) : null;
 }
