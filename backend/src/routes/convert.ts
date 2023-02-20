@@ -4,6 +4,10 @@ import getRates, { RatesResponse } from "../externalAPI/getRates";
 import getCurrencies, {
   CurrenciesResponse,
 } from "../externalAPI/getCurrencies";
+import {
+  convertToUSD,
+  convertToDestinationCurrency,
+} from "../converter/converter";
 
 const router = express.Router();
 
@@ -58,13 +62,8 @@ router.get("/", async (req, res) => {
     return;
   }
 
-  const rateFrom = rates.rates[fromCurrency];
-  const rateTo = rates.rates[toCurrency];
-  const resultUSD = amount / rateFrom;
-  const result = resultUSD * rateTo;
-
   try {
-    await insertStats(toCurrency, resultUSD);
+    await insertStats(toCurrency, convertToUSD(rates, amount, fromCurrency));
   } catch (err) {
     console.error(err);
     res.status(500).send("DB error - cannot save stats!");
@@ -77,7 +76,12 @@ router.get("/", async (req, res) => {
       to: toCurrency,
       amount: amount,
     },
-    result,
+    result: convertToDestinationCurrency(
+      rates,
+      amount,
+      fromCurrency,
+      toCurrency
+    ),
   });
 });
 
