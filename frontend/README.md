@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Currency converter - frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Environment variables
+
+- `REACT_APP_API_URL` - set to the backend API URL
 
 ## Available Scripts
 
